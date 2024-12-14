@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        *{
+            font-family:Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        a{
+            text-decoration: dashed;
+            color: aliceblue;
+        }
+        a:hover{
+            text-decoration: dashed;
+            background-color: rgb(3, 3, 54);
+            color: rgb(255, 255, 255);
+        }
+        .form1{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;  
+            padding: 1rem;         
+        }
+        form{
+            padding: 5rem;
+        }
+        button:hover{
+            cursor: pointer;
+        }
+    </style>
+    <title>
+       SaveText.io - {{PageName}}
+    </title>
+</head>
+<body style="margin: 0;display: flex;flex-direction: column;justify-content: center;">
+    <div style="height: 80px;padding: 10px;margin: 0;background-color: rgb(39, 71, 177);color: aliceblue;display: flex;justify-content: space-between;align-items: center;">
+        <b>
+            <h3>
+                SaveText.io 
+            </h3>
+        </b>
+
+        <div style="display: flex;padding: 15px;justify-content: center;align-items: center;">
+                
+
+                {%if isLogged==True %}
+                    <a href="main" >
+                        <div style="padding: 15px;text-decoration: none;">
+                            Home
+                        </div>
+                    </a>
+                    <a href="info" >
+                        <div style="padding: 15px;text-decoration: none;">
+                            {{user["name"]}}
+                        </div>
+                    </a>
+                    <a href="about" >
+                        <div style="padding: 15px;text-decoration: none;">
+                            About Us
+                        </div>
+                    </a>
+                    <a href="logout" >
+                        <div style="padding: 15px;text-decoration: none;">
+                            Log Out
+                        </div>
+                    </a>
+                {%else%}
+                    
+                    <a href="main" >
+                        <div style="padding: 15px;text-decoration: none;">
+                            Home
+                        </div>
+                    </a>
+                    <a href="login" >
+                        <div style="padding: 15px;text-decoration: none;">
+                            Login
+                        </div>
+                    </a>
+                    <a href="about" >
+                        <div style="padding: 15px;text-decoration: none;">
+                            About Us
+                        </div>
+                    </a>
+                {%endif%}
+                
+        </div>
+    </div>
+    {% block content%}
+    {%endblock%}
+</body>
+</html>

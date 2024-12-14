@@ -1,0 +1,14 @@
+{%extends 'layout1.html'%}
+{% block content%}
+{%if isLogged==False %}
+
+<h2 style="text-align: center;">
+    Welcome To SaveText.io
+</h2>
+{%else%}
+
+<h2 style="text-align: center;">
+    Welcome To SaveText.io {{user["name"]}}
+</h2>
+{%endif%}
+{%endblock%}

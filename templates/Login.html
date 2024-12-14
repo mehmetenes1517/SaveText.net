@@ -1,0 +1,16 @@
+{%extends 'layout1.html'%}
+{%block content%}
+
+    <form style="display: flex;flex-direction: column;align-items: center;justify-content: center;" action="login" method="post">
+        <div class="form1">
+            <div >Username : </div>
+            <input type="text" name="username" id="" required>
+        </div class="form1">
+        <div class="form1">
+            <div >Password : </div>
+            <input type="password" name="password" id="" required>
+        </div>
+        <button style="padding: 1rem;border-radius: 1rem;border: 0;background-color: rgb(119, 119, 255);color: aliceblue;" type="submit">Login</button>
+    </form> 
+
+{%endblock%}

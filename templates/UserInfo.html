@@ -1,0 +1,15 @@
+{%extends 'layout1.html'%}
+{%block content%}
+{%if isLogged==True%}
+<form style="display: flex;flex-direction: column;align-items: center;justify-content: center;" method="post" action="/info">
+    
+    <div class="form1"><h4>UserID : </h3><input type="text" name="id" id="" value="{{user['id']}}"width="3rem" required readonly></div>
+    <div class="form1"><h4>Name : </h3><input type="text" name="name" id="" value="{{user['name']}}"width="3rem" required></div>
+    <div class="form1"><h4>UserName :</h3><input type="text" name="username" id="" value="{{user['username']}}"width="3rem" readonly required></div>
+    <div class="form1"><h4>Password :</h3><input type="text" name="password" id="" value="{{user['password']}}"width="3rem" required></div>
+    <div class="form1"><h4>Email : </h3><input type="text" name="email" id="" value="{{user['email']}}"width="3rem" readonly required></div>
+    <div class="form1"><h4>Phone : </h3><input type="tel" name="phone" id="" value="{{user['phone']}}"width="3rem" required></div>
+    <button type="submit" style="background-color: rgb(93, 93, 214);border:0;border-radius: 1rem;padding: 1rem; font-family: Arial, Helvetica, sans-serif;color: aliceblue;">Update</button>
+</form>
+{%endif%}
+{%endblock%}
