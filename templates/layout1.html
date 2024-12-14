@@ -31,6 +31,31 @@
         button:hover{
             cursor: pointer;
         }
+        .note-container{
+
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+        }
+        .note-div{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(155, 155, 255);
+            border: 0;
+            border-radius: 1rem;
+            padding: 1rem;
+            width: 20%;
+            
+        }
+        .note-icon{
+
+            width: 50px;
+            height: 50px;
+
+        }
     </style>
     <title>
        SaveText.io - {{PageName}}
@@ -48,39 +73,39 @@
                 
 
                 {%if isLogged==True %}
-                    <a href="main" >
+                    <a href="/main" >
                         <div style="padding: 15px;text-decoration: none;">
                             Home
                         </div>
                     </a>
-                    <a href="info" >
+                    <a href="/info" >
                         <div style="padding: 15px;text-decoration: none;">
                             {{user["name"]}}
                         </div>
                     </a>
-                    <a href="about" >
+                    <a href="/about" >
                         <div style="padding: 15px;text-decoration: none;">
                             About Us
                         </div>
                     </a>
-                    <a href="logout" >
+                    <a href="/logout" >
                         <div style="padding: 15px;text-decoration: none;">
                             Log Out
                         </div>
                     </a>
                 {%else%}
                     
-                    <a href="main" >
+                    <a href="/main" >
                         <div style="padding: 15px;text-decoration: none;">
                             Home
                         </div>
                     </a>
-                    <a href="login" >
+                    <a href="/login" >
                         <div style="padding: 15px;text-decoration: none;">
                             Login
                         </div>
                     </a>
-                    <a href="about" >
+                    <a href="/about" >
                         <div style="padding: 15px;text-decoration: none;">
                             About Us
                         </div>

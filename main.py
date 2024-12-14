@@ -44,9 +44,13 @@ def main():
         if "userID" in session:
             # if session is opened
             user1=getUser(session["userID"])
-            print(user1)
-            return render_template("index.html",PageName="MainPage",user=user1,isLogged=True)
-        return render_template("index.html",PageName="MainPage",user="",isLogged=False)
+
+            res=rq.post("http://127.0.0.1:5102/getnotes",json={"OwnerID":session["userID"]})
+            notes=res.json()
+                
+            print(notes[0][2])
+            return render_template("index.html",notes=notes,user=user1,PageName="MainPage",isLogged=True)
+        return render_template("index.html",notes=[],user="",PageName="MainPage",isLogged=False)
     elif (request.method=="POST"):
         return redirect(url_for("main"))
 
@@ -72,8 +76,6 @@ def about():
 def LogOut():
     session.clear()
     return redirect(url_for("main"))
-
-
 
 #LOGIN
 @app.route("/login",methods=["GET","POST"])
@@ -127,6 +129,21 @@ def UserInfo():
         response=rq.post("http://127.0.0.1:5101/update",json=updated_user)            
 
         return redirect(url_for("UserInfo"))
+
+
+@app.route("/notes/<int:index>",methods=["GET"])
+def Notes(index):
+    if request.method=="GET":
+        if "userID" in session:
+            id_obj={
+                "NoteID":index
+            }
+            res=rq.get("http://127.0.0.1:5102/getnote",json=id_obj)
+            return render_template("notepage.html",note=res.json(),user=getUser(session["userID"]),PageName=f"NoteID {index}",isLogged=True)
+    else:
+        return "Not Found",404
+
+
 
 
 if __name__=="__main__":
