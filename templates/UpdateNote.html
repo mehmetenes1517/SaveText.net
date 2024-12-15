@@ -1,0 +1,20 @@
+{%extends "layout1.html"%}
+{%block content%}
+
+<form  method="post" id="update-form" style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
+
+    <input type="text" name="header" id="" style="width: 25rem;padding: 1rem;margin: 1rem;" value="{{note['header']}}">
+    
+    <textarea name="body" id="" style="width: 25rem;height: 27rem; padding: 1rem;margin: 1rem;">{{note['body']}}</textarea>
+    
+    <button type="submit" style="padding: 1rem;background-color: rgb(72, 72, 219);color: aliceblue;margin: 1rem;border: 0;border-radius: 1rem;">
+        Update
+    </button>
+    
+    
+    </form>
+    <script>
+        document.getElementById('update-form').action = window.location.pathname;
+    </script>
+
+{%endblock%}

@@ -1,7 +1,24 @@
 {%extends 'layout1.html'%}
 {%block content%}
-<div style="padding: 3rem;">
+<div style="display: flex;flex-direction: row;justify-content: first baseline;">
+    <form action="/delete" id="delete-button" method="post" style="padding: 0;margin: 10px;">
+        <button type="submit" style="padding: 1rem;margin: 0;background-color: rgb(184, 18, 18);color: aliceblue;border: 0;border-radius: 1rem;">Delete</button>
+    </form>
+    <form action="/update" id="update-button" method="get" style="padding: 0;margin: 10px;">
+        <button type="submit" style="padding: 1rem;margin: 0;background-color: green;color: aliceblue;border: 0;border-radius: 1rem;">Update</button>
+    </form>
+</div>
+<script>
+    // Mevcut URL'yi al ve formun action özelliğini ayarla
+    document.getElementById('delete-button').action = window.location.pathname;
+
+    const path = window.location.pathname; // Örnek: /note/0
+    const id = path.split('/').pop(); // "0" değerini alır
+    document.getElementById('update-button').action ="/update/"+id;
+</script>
+
+<div style="padding: 1rem;">
     <h2>{{note["header"]}}</h2>
-    <p>{{note["body"]}}</p>
+    <div style="margin: 1rem;text-wrap-style: auto;flex-wrap: wrap;word-wrap: break-word;">{{note["body"]}}</div>
 </div>
 {%endblock%}

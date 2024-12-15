@@ -17,6 +17,22 @@ def getUser(id):
         }
         return user
 
+def getNote(id):
+    response=rq.get("http://127.0.0.1:5102/getnote",json={"NoteID":id})
+    if response.status_code==200:
+        note={
+            "NoteID":id,
+            "OwnerID":response.json()["OwnerID"],
+            "header":response.json()["header"],
+            "body":response.json()["body"]
+        }
+        return note
+    else:
+        return {"NoteID":0,
+            "OwnerID":0,
+            "header":0,
+            "body":0}
+
 def getName(id):
     response=rq.post("http://127.0.0.1:5101/get",json={"id":id})
     if(response.status_code==200):
@@ -48,7 +64,6 @@ def main():
             res=rq.post("http://127.0.0.1:5102/getnotes",json={"OwnerID":session["userID"]})
             notes=res.json()
                 
-            print(notes[0][2])
             return render_template("index.html",notes=notes,user=user1,PageName="MainPage",isLogged=True)
         return render_template("index.html",notes=[],user="",PageName="MainPage",isLogged=False)
     elif (request.method=="POST"):
@@ -131,7 +146,7 @@ def UserInfo():
         return redirect(url_for("UserInfo"))
 
 
-@app.route("/notes/<int:index>",methods=["GET"])
+@app.route("/notes/<int:index>",methods=["GET","POST"])
 def Notes(index):
     if request.method=="GET":
         if "userID" in session:
@@ -140,9 +155,73 @@ def Notes(index):
             }
             res=rq.get("http://127.0.0.1:5102/getnote",json=id_obj)
             return render_template("notepage.html",note=res.json(),user=getUser(session["userID"]),PageName=f"NoteID {index}",isLogged=True)
+    elif request.method=="POST":
+        if "userID" in session:
+            delete_json={
+                "NoteID":index,
+                "OwnerID":session["userID"]
+            }
+            response=rq.post("http://127.0.0.1:5102/delete",json=delete_json)         
+            if(response.ok==True):
+                return redirect(url_for("main"))
     else:
         return "Not Found",404
 
+@app.route("/addnote",methods=["GET","POST"])
+def AddNote():
+    if request.method =="GET":
+        if "userID" in session:
+            return render_template("AddNote.html",isLogged=True,PageName="Add Note",user=getUser(session["userID"]))
+        else:
+            return render_template("AddNote.html",isLogged=False,PageName="",user={})
+    elif request.method=="POST":
+        if "userID" in session:
+            noteobj={
+                "OwnerID":session["userID"],
+                "header":request.form["header"],
+                "body":request.form["body"]
+            }
+            response=rq.post("http://127.0.0.1:5102/add",json=noteobj)
+            return redirect(url_for("main"))
+
+@app.route("/update/<int:index>",methods=["GET","POST"])
+def UpdateNote(index):
+    if request.method=="POST":
+        note_obj={
+            "NoteID":index,
+            "header":request.form["header"],
+            "body":request.form["body"]
+        }
+        response=rq.post("http://127.0.0.1:5102/update",json=note_obj)
+        return redirect(url_for("main"))
+    elif request.method=="GET":
+        if "userID" in session:
+            return render_template("UpdateNote.html",note=getNote(index),isLogged=True,PageName="Update Note",user=getUser(session["userID"]))
+        else:
+            return render_template("UpdateNote.html",note={},isLogged=False,PageName="",user={})
+
+
+
+@app.route("/registeruser",methods=["GET","POST"])
+def RegisterUser():
+    if request.method=="POST":
+        user_obj={
+                "name":request.form["name"],
+                "username":request.form["username"],
+                "password":request.form["password"],
+                "email":request.form["email"],
+                "phone":request.form["phone"]
+            }
+        res=rq.post("http://127.0.0.1:5101/register",json=user_obj)
+        if res.ok:
+            return redirect(url_for("main"))
+        else:
+            return redirect(url_for("registeruser"))
+    elif request.method=="GET":
+        if "userID" in session:
+            return render_template("Register.html",isLogged=True,PageName="Register",user=getUser(session["userID"]))
+        else:
+            return render_template("Register.html",isLogged=False,PageName="Register",user={})
 
 
 

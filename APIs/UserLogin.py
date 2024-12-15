@@ -1,9 +1,9 @@
 from flask import Flask,request,jsonify,Response
 from flask_cors import CORS
 import sqlite3
+import requests as rq
 
-
-
+PORT=5101
 
 
 
@@ -153,11 +153,31 @@ def GetUserID():
         return "Invalid Method Type",404
 
 
-
-
-
+@app.route("/register",methods=["POST"])
+def RegisterUser():
+    if request.method=="POST":
+        con=sqlite3.connect("FFF1.db")
+        user_cursor=con.execute("SELECT * FROM users WHERE username='{}' AND email='{}' ".format(request.json["username"],request.json["email"]))
+        list1=user_cursor.fetchall()
+        if(len(list1)==0):
+            user_obj={
+                "name":request.json["name"],
+                "username":request.json["username"],
+                "password":request.json["password"],
+                "email":request.json["email"],
+                "phone":request.json["phone"]
+            }
+            res=rq.post("http://127.0.0.1:{}/create".format(PORT),json=user_obj)
+            res.close()
+            if res.ok:
+                user_cursor.close()
+                con.close()
+                return "ok",200
+        user_cursor.close()
+        con.close()
+        return "user exist",500
 
 
 
 if(__name__=="__main__"):
-    app.run(port=5101)
+    app.run(port=PORT)
