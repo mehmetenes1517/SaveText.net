@@ -2,7 +2,7 @@ from flask_cors import CORS
 from flask import Flask,render_template,session,request,redirect,url_for
 import requests as rq
 import sqlite3
-
+from waitress import serve
 
 def getUser(id):
     response=rq.post("http://127.0.0.1:5101/get",json={"id":id})
@@ -224,6 +224,5 @@ def RegisterUser():
             return render_template("Register.html",isLogged=False,PageName="Register",user={})
 
 
-
 if __name__=="__main__":
-    app.run(port=5300)
+    serve(app,host="0.0.0.0",port=80,threads=1)
