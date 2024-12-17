@@ -118,7 +118,7 @@ def CheckUser():
         con=sqlite3.connect("FFF1.db")
         cursor=con.execute("SELECT password FROM users WHERE username='{}'".format(username))
         
-        data=cursor.fetchone()
+        data=cursor.fetchall()
         if(len(data)==0):
             cursor.close()
             con.close()
