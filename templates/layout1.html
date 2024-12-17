@@ -68,18 +68,9 @@
         {%block content%}
         {%endblock%}
 
-        <script src="js/plugins.js"></script>
-    <script>
-        $(window).on("load", function() {
-            $('body').addClass('loaded');
-        });
-    </script>
 
-        <script src="{{url_for('static',filename=js/plugins.js")}}></script>
-        <script>
-        $(window).on("load", function() {
-            $('body').addClass('loaded');
-        });
-        </script>
+
+        <script src='{{url_for("static",filename="js/plugins.js")}}'></script>
+
 </body>
 </html>
