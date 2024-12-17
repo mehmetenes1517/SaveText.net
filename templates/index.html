@@ -1,34 +1,51 @@
 {%extends 'layout1.html'%}
-{% block content%}
-{%if isLogged==False %}
+    {%block content%}
 
-<h2 style="text-align: center;">
-    Welcome To SaveText.io
-</h2>
+        
 
-
-    
-{%else%}
-    <h2 style="text-align: center;">
-        Welcome To SaveText.io {{user["name"]}}
-    </h2>
-    <br>
-    <form action="/addnote" style="padding: 0;margin: 1rem;" method="get">
-        <button type="submit" style="padding: 1rem;background-color: rgb(72, 72, 214);color: aliceblue;border: 0;border-radius: 1rem;">Add New Note</button>
-    </form>
-    <br>
-    <div class="note-container">
-   
-        {%for note in notes %}
-           
-            <div class="note-div">
-                <a href="/notes/{{note[0]}}" class="note-div" style="width: 40%;text-align: center;">
-                    <img class="note-icon" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.pngmart.com%2Ffiles%2F23%2FNote-Icon-PNG-Isolated-HD.png&f=1&nofb=1&ipt=0d86c2a4afa6cc5033e87da63b62e65ed2ac3897788342fe03e52f3de2711270&ipo=images" alt="">
-                    <h4>{{note[2]}}</h4>
-                </a>
+        <div class="container-fluid tm-container-content tm-mt-60">
+            <div class="row mb-4">
+                <h2 class="col-6 tm-text-primary">
+                    All Notes
+                </h2>
+                <div class="col-6 d-flex justify-content-end align-items-center">
+                    {%if isLogged==True%}
+                    <form style="display: flex;flex-direction: column;align-items: center;justify-content: center;" action="/addnote" method="get">
+                        <button class="btn btn-outline-success tm-search-btn" style="margin: 3px;" type="submit">
+                            Add Note
+                        </button>
+                    </form> 
+                    {%endif%}
+                </div>
             </div>
-        {%endfor%}
-    </div>
-{%endif%}
+            <div class="row tm-mb-90 tm-gallery">
+                {%for note in notes%}
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-5">
+                    <figure class="effect-ming tm-video-item">
+                        <img src="img/img-03.jpg" alt="Image" class="img-fluid">
+                        <figcaption class="d-flex align-items-center justify-content-center">
+                            <h2>{{note[2]}}</h2>
+                            <a href="/notes/{{note[0]}}">View more</a>
+                        </figcaption>                    
+                    </figure>
+                    <div class="d-flex justify-content-between tm-text-gray">
+                        
+                    </div>
+                </div>
+                {%endfor%}
+            </div> <!-- row -->
+            <div class="row tm-mb-90">
+                <div class="col-12 d-flex justify-content-between align-items-center tm-paging-col">
+                    <a href="javascript:void(0);" class="btn btn-primary tm-btn-prev mb-2 disabled">Previous</a>
+                    <div class="tm-paging d-flex">
+                        <a href="javascript:void(0);" class="active tm-paging-link">1</a>
+                        <a href="javascript:void(0);" class="tm-paging-link">2</a>
+                        <a href="javascript:void(0);" class="tm-paging-link">3</a>
+                        <a href="javascript:void(0);" class="tm-paging-link">4</a>
+                    </div>
+                    <a href="javascript:void(0);" class="btn btn-primary tm-btn-next">Next Page</a>
+                </div>            
+            </div>
+        </div> <!-- container-fluid, tm-container-content -->
 
-{%endblock%}
+    {%endblock%}

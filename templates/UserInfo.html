@@ -1,15 +1,40 @@
 {%extends 'layout1.html'%}
 {%block content%}
 {%if isLogged==True%}
-<form style="display: flex;flex-direction: column;align-items: center;justify-content: center;" method="post" action="/info">
+
+<div class="container-fluid tm-container-content tm-mt-60">
+
+    <form style="display: flex;flex-direction: column;align-items: center;justify-content: center;" method="post" action="/info">
+        <div class="form1">
+            <div >UserID : </div>
+            <input class="form-control tm-search-input" style="margin: 3px;border :1px solid black;border-radius: 12px;" type="text" placeholder="Name" value="{{user['id']}}" name="name" readonly required>
+        </div class="form1">
+        <div class="form1">
+            <div >Name : </div>
+            <input class="form-control tm-search-input" style="margin: 3px;border :1px solid black;border-radius: 12px;" type="text" placeholder="Name" value="{{user['name']}}"  name="name" required>
+        </div class="form1">
+        <div class="form1">
+            <div >Username : </div>
+            <input class="form-control tm-search-input" style="margin: 3px;border :1px solid black;border-radius: 12px;" type="text" placeholder="Username" value="{{user['username']}}" name="username"  readonly required>
+        </div class="form1">
+        <div class="form1">
+            <div >Password : </div>
+            <input class="form-control tm-search-input" style="margin: 3px; border: 1px solid black;border-radius: 12px;" type="password" placeholder="Password" value="{{user['password']}}" name="password" required>
+        </div>
+        <div class="form1">
+            <div >Email : </div>
+            <input class="form-control tm-search-input" style="margin: 3px; border: 1px solid black;border-radius: 12px;" type="email" placeholder="xxx@xxx.com" value="{{user['email']}}" name="email" readonly required>
+        </div>
+        <div class="form1">
+            <div >Phone : </div>
+            <input class="form-control tm-search-input" style="margin: 3px; border: 1px solid black;border-radius: 12px;" type="tel" name="phone" placeholder="+xx xxx xxx xx xx" value="{{user['phone']}}" pattern="[+]{1}[0-9]{11,14}" readonly required>
+        </div>
+        <button class="btn btn-outline-success tm-search-btn" style="margin: 3px;" type="submit">
+            Update
+        </button>
+    </form> 
     
-    <div class="form1"><h4>UserID : </h3><input type="text" name="id" id="" value="{{user['id']}}"width="3rem" required readonly></div>
-    <div class="form1"><h4>Name : </h3><input type="text" name="name" id="" value="{{user['name']}}"width="3rem" required></div>
-    <div class="form1"><h4>UserName :</h3><input type="text" name="username" id="" value="{{user['username']}}"width="3rem" readonly required></div>
-    <div class="form1"><h4>Password :</h3><input type="text" name="password" id="" value="{{user['password']}}"width="3rem" required></div>
-    <div class="form1"><h4>Email : </h3><input type="text" name="email" id="" value="{{user['email']}}"width="3rem" readonly required></div>
-    <div class="form1"><h4>Phone : </h3><input type="tel" name="phone" id="" value="{{user['phone']}}" pattern="[+]{1}[0-9]{11,14}"  width="3rem" required></div>
-    <button type="submit" style="background-color: rgb(93, 93, 214);border:0;border-radius: 1rem;padding: 1rem; font-family: Arial, Helvetica, sans-serif;color: aliceblue;">Update</button>
-</form>
+</div>
+
 {%endif%}
 {%endblock%}

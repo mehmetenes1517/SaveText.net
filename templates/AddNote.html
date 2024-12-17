@@ -1,13 +1,14 @@
 {%extends "layout1.html"%}
 {%block content%}
 
-<form action="" method="post" style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
-
+<form action="/addnote" method="post" style="display: flex;flex-direction: column;align-items: center;justify-content: center;">
+<label for="header">Header :</label>
 <input type="text" name="header" id="" style="width: 25rem;padding: 1rem;margin: 1rem;">
 
+<label for="body">Body : </label>
 <textarea name="body" id="" style="width: 25rem;height: 27rem; padding: 1rem;margin: 1rem;"></textarea>
 
-<button type="submit" style="padding: 1rem;background-color: rgb(72, 72, 219);color: aliceblue;margin: 1rem;border: 0;border-radius: 1rem;">
+<button class="btn btn-outline-success tm-search-btn" style="margin: 3px;" type="submit">
     Add
 </button>
 

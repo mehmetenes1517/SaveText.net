@@ -1,13 +1,38 @@
 {%extends 'layout1.html'%}
-{% block content%}
-    <h5>  
-        <b>    
-            <p style="font-size: large;display: flex;flex-direction: column;align-items: center;justify-content: center;font-family: Arial, Helvetica, sans-serif;">
-                <p style="padding: 1pc;text-align: center;">Site Author : {{author["name"]}}</p>
-                <p style="padding: 1pc;text-align: center;">Email : {{author["email"]}}</p>
-            </p>
-        </b>  
-    </h5>
+    <!-- Page Loader -->
+    {%block content%}
+        
+        <div class="container-fluid tm-mt-60">
+            
+        </div> <!-- container-fluid, tm-container-content -->
 
-
-{%endblock%}
+        <footer class="tm-bg-gray pt-5 pb-3 tm-text-gray tm-footer">
+            <div class="container-fluid tm-container-small">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 col-12 px-5 mb-5">
+                        <h3 class="tm-text-primary mb-4 tm-footer-title">About SaveText.io</h3>
+                        <p>SaveText.io is a free note saving website that provide security for users</p>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12 px-5 mb-5">
+                        <h3 class="tm-text-primary mb-4 tm-footer-title">Contact</h3>
+                        <ul class="tm-footer-links pl-0">
+                            <li>Site Author : {{author["name"]}}</li>
+                            <li>Author Email : {{author["email"]}}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-5 col-12 px-5 text-right">
+                        Designed by <a href="https://templatemo.com" class="tm-text-gray" rel="sponsored" target="_parent">TemplateMo</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        
+        <script src="js/plugins.js"></script>
+        <script>
+            $(window).on("load", function() {
+                $('body').addClass('loaded');
+            });
+        </script>
+    {%endblock%}

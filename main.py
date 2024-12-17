@@ -127,25 +127,22 @@ def UserInfo():
     if(request.method=="GET"):
         if "userID" in session:
             return render_template("UserInfo.html",user=getUser(session["userID"]),PageName="User Information",isLogged=True)
-        else:
-            return render_template("UserInfo.html",user="",PageName="User Information",isLogged=False)
     elif request.method=="POST":
-
-        updated_user={
-            "id":request.form["id"],
-            "name":request.form["name"],
-            "username":request.form["username"],
-            "password":request.form["password"],
-            "email":request.form["email"],
-            "phone":request.form["phone"]
-        }
-
-
-        response=rq.post("http://127.0.0.1:5101/update",json=updated_user)            
-
-        return redirect(url_for("UserInfo"))
+        if "userID" in session:
+            updated_user={
+                "id":request.form["id"],
+                "name":request.form["name"],
+                "username":request.form["username"],
+                "password":request.form["password"],
+                "email":request.form["email"],
+                "phone":request.form["phone"]
+            }
 
 
+            response=rq.post("http://127.0.0.1:5101/update",json=updated_user)            
+
+            return redirect(url_for("UserInfo"))
+        
 @app.route("/notes/<int:index>",methods=["GET","POST"])
 def Notes(index):
     if request.method=="GET":
@@ -172,8 +169,6 @@ def AddNote():
     if request.method =="GET":
         if "userID" in session:
             return render_template("AddNote.html",isLogged=True,PageName="Add Note",user=getUser(session["userID"]))
-        else:
-            return render_template("AddNote.html",isLogged=False,PageName="",user={})
     elif request.method=="POST":
         if "userID" in session:
             noteobj={
@@ -187,18 +182,18 @@ def AddNote():
 @app.route("/update/<int:index>",methods=["GET","POST"])
 def UpdateNote(index):
     if request.method=="POST":
-        note_obj={
-            "NoteID":index,
-            "header":request.form["header"],
-            "body":request.form["body"]
-        }
-        response=rq.post("http://127.0.0.1:5102/update",json=note_obj)
-        return redirect(url_for("main"))
+        if "userID" in session:
+            note_obj={
+                "NoteID":index,
+                "header":request.form["header"],
+                "body":request.form["body"]
+            }
+            response=rq.post("http://127.0.0.1:5102/update",json=note_obj)
+            return redirect(url_for("main"))
     elif request.method=="GET":
         if "userID" in session:
             return render_template("UpdateNote.html",note=getNote(index),isLogged=True,PageName="Update Note",user=getUser(session["userID"]))
-        else:
-            return render_template("UpdateNote.html",note={},isLogged=False,PageName="",user={})
+        
 
 
 
@@ -225,4 +220,4 @@ def RegisterUser():
 
 
 if __name__=="__main__":
-    serve(app,host="0.0.0.0",port=80,threads=1)
+    serve(app,host="0.0.0.0",port=80,threads=4)

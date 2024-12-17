@@ -1,16 +1,22 @@
 {%extends 'layout1.html'%}
 {%block content%}
 
-    <form style="display: flex;flex-direction: column;align-items: center;justify-content: center;" action="login" method="post">
+<div class="container-fluid tm-container-content tm-mt-60">
+
+    <form style="display: flex;flex-direction: column;align-items: center;justify-content: center;" action="/login" method="post">
         <div class="form1">
             <div >Username : </div>
-            <input type="text" name="username" id="" required>
+            <input class="form-control tm-search-input" style="margin: 3px;border :1px solid black;border-radius: 12px;" type="text" placeholder="Username" name="username" required>
         </div class="form1">
         <div class="form1">
             <div >Password : </div>
-            <input type="password" name="password" id="" required>
+            <input class="form-control tm-search-input" style="margin: 3px; border: 1px solid black;border-radius: 12px;" type="password" placeholder="Password" name="password" required>
         </div>
-        <button style="padding: 1rem;border-radius: 1rem;border: 0;background-color: rgb(119, 119, 255);color: aliceblue;" type="submit">Login</button>
+        <button class="btn btn-outline-success tm-search-btn" style="margin: 3px;" type="submit">
+            Login
+        </button>
     </form> 
+    
+</div>
 
 {%endblock%}
