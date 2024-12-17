@@ -41,7 +41,7 @@ def getName(id):
 database=sqlite3.connect("FFF1.db")
 
 app=Flask(__name__)
-app.secret_key="a"
+app.secret_key="secret?"
 author={
     "name":"Mehmet Enes Gedikoğlu",
     "email":"mehmetenesgedikoglu@gmail.com"

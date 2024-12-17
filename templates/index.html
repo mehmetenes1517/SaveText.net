@@ -1,9 +1,11 @@
 {%extends 'layout1.html'%}
     {%block content%}
-
+    
         
 
         <div class="container-fluid tm-container-content tm-mt-60">
+            {%if isLogged==True%}
+            <h2 style="text-align: center;">Welcome to Savetext.net {{user["name"]}}</h2>
             <div class="row mb-4">
                 <h2 class="col-6 tm-text-primary">
                     All Notes
@@ -46,6 +48,10 @@
                     <a href="javascript:void(0);" class="btn btn-primary tm-btn-next">Next Page</a>
                 </div>            
             </div>
+            {%else%}
+            <h2 style="text-align: center; ">Welcome to Savetext.net  <a href="/registeruser">JOIN US</a></h2>
+            {%endif%}
+            
         </div> <!-- container-fluid, tm-container-content -->
 
     {%endblock%}
