@@ -216,7 +216,7 @@ def RegisterUser():
         if res.ok:
             return redirect(url_for("main"))
         else:
-            return redirect(url_for("registeruser"))
+            return redirect(url_for("RegisterUser"))
     elif request.method=="GET":
         if "userID" in session:
             return render_template("Register.html",isLogged=True,PageName="Register",user=getUser(session["userID"]))
