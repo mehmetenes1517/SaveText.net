@@ -102,12 +102,11 @@ def Login():
         }
 
         response=rq.post("http://127.0.0.1:5101/check",json=object1)
-        #print("x")
-        if(response.ok==True):
+        if(response.status_code==200):
+            print("bb")
             idobj={
                 "username":request.form["username"]
             }
-            
             r=rq.post("http://127.0.0.1:5101/getID",json=idobj)
             if(r.status_code==200):
                 print("aaaaa")
@@ -209,6 +208,15 @@ def RegisterUser():
             }
         res=rq.post("http://127.0.0.1:5101/register",json=user_obj)
         if res.ok:
+            idobj={
+                "username":request.form["username"]
+            }
+            r=rq.post("http://127.0.0.1:5101/getID",json=idobj)
+            if(r.status_code==200):
+                print("aaaaa")
+                session["userID"]=r.json()["id"]
+
+                r.close()
             return redirect(url_for("main"))
         else:
             return redirect(url_for("RegisterUser"))

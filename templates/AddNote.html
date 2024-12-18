@@ -1,7 +1,12 @@
 {%extends "layout1.html"%}
 {%block content%}
-
+<form style="display: flex;flex-direction: column;align-items: center;justify-content: center;" action="/index" method="get">
+    <button class="btn btn-outline-success tm-search-btn" style="margin: 3px;" type="submit">
+        Go Back
+    </button>
+</form> 
 <form action="/addnote" method="post" style="display: flex;flex-direction: column;align-items: center;justify-content: center;">
+
 <label for="header">Header :</label>
 <input type="text" name="header" id="" style="width: 25rem;padding: 1rem;margin: 1rem;">
 

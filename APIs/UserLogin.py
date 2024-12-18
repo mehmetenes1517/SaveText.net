@@ -123,9 +123,8 @@ def CheckUser():
             cursor.close()
             con.close()
             return "There is no user exists",404
-        
-
-        true_password=data[0]
+        true_password=data[0][0]
+        print(true_password+ "  " + password)
         if(true_password==password):
             cursor.close()
             con.close()

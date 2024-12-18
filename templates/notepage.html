@@ -3,6 +3,11 @@
         <div class="container-fluid tm-container-content tm-mt-60">
 
             <div style="display: flex;flex-direction: row;justify-content: first baseline;">
+                <form style="display: flex;flex-direction: column;align-items: center;justify-content: center;" action="/index" method="get">
+                    <button class="btn btn-outline-success tm-search-btn" style="margin: 3px;" type="submit">
+                        Go Back
+                    </button>
+                </form> 
                 <form style="display: flex;flex-direction: column;align-items: center;justify-content: center;" action="/delete" id="delete-button" method="post">
                     <button class="btn btn-outline-success tm-search-btn" style="margin: 3px;" type="submit">
                         Delete
@@ -24,7 +29,6 @@
             <script>
                 // Mevcut URL'yi al ve formun action özelliğini ayarla
                 document.getElementById('delete-button').action = window.location.pathname;
-                
                 const path = window.location.pathname; // Örnek: /note/0
                 const id = path.split('/').pop(); // "0" değerini alır
                 document.getElementById('update-button').action ="/update/"+id;
